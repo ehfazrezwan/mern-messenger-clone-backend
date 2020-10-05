@@ -1,0 +1,27 @@
+{
+  "name": "messengerclonebackend",
+  "version": "1.0.0",
+  "description": "MERN stack clone of Facebook Messenger. This package is the backend",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ehfazrezwan/mern-messenger-clone-backend.git"
+  },
+  "author": "Ehfaz Rezwan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ehfazrezwan/mern-messenger-clone-backend/issues"
+  },
+  "homepage": "https://github.com/ehfazrezwan/mern-messenger-clone-backend#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.7",
+    "pusher": "^3.0.1"
+  }
+}
