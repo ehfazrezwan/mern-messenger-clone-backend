@@ -63,7 +63,7 @@ app.get("/retrieve/conversation", (req, res) => {
       res.status(500).send(err);
     } else {
       data.sort((b, a) => {
-        return a.timestamp - b.timestamp;
+        return b.timestamp - a.timestamp;
       });
       res.status(200).send(data);
     }
