@@ -9,6 +9,15 @@ import mongoMessages from "./messageModel.js";
 // app config
 const app = express();
 const port = process.env.PORT || 9000;
+
+const pusher = new Pusher({
+  appId: "1086089",
+  key: "4d64738e80dc8729cdb1",
+  secret: "5e70b0ae693dde3c5bd6",
+  cluster: "ap2",
+  useTLS: true,
+});
+
 // middlewares
 
 app.use(express.json());
@@ -25,6 +34,13 @@ mongoose.connect(mongoURI, {
 
 mongoose.connection.once("open", () => {
   console.log("DB Connected");
+
+  const changeStream = mongoose.connection.collection("messages").watch();
+  changeStream.on("change", (change) => {
+    pusher.trigger("messages", "newMessage", {
+      change: change,
+    });
+  });
 });
 
 // api routes
@@ -46,6 +62,9 @@ app.get("/retrieve/conversation", (req, res) => {
     if (err) {
       res.status(500).send(err);
     } else {
+      data.sort((b, a) => {
+        return a.timestamp - b.timestamp;
+      });
       res.status(200).send(data);
     }
   });
